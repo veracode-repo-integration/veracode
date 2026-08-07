@@ -54,6 +54,9 @@ veracode_sca_scan:
       - synchronize
     target_branch:
       - default_branch
+  fix_for_sca:
+    pull_request:
+        trigger: true
   # If the break_build_on_error is set to true, the build will break if the scan failed to complete or with an error, no libraries were found, 
   # or no build system was found and the error_message will be displayed.
   break_build_on_error: true
