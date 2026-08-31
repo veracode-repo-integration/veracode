@@ -57,6 +57,7 @@ jobs:
       run_id: ${{ github.run_id }}
       branch: ${{ github.event.client_payload.repository.branch }}
       default_runs_on: ${{ github.event.client_payload.user_config.default_runs_on }}
+      pull_request_num: ${{ github.event.client_payload.pull_request_num }}
 
   validations:
     needs: register
