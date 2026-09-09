@@ -105,4 +105,5 @@ jobs:
         repository: ${{ github.event.client_payload.repository.full_name }}
         branch: ${{ github.event.client_payload.repository.branch }}
         fix-sca-params: ${{ github.event.client_payload.fix_sast_params }}
+        fix-sast-params: ${{ github.event.client_payload.fix_sast_params }}
         github-api-url: ${{ github.api_url }}
