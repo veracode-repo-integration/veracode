@@ -5,7 +5,7 @@ run-name: Veracode Fix for SAST - ${{ github.event.client_payload.workflow_name 
 on:
   repository_dispatch:
     types:
-      - veracode-fix-for-sca
+      - veracode-fix-for-sast
 
 jobs:
   cleanup:
