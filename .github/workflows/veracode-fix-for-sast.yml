@@ -93,8 +93,9 @@ jobs:
       with:
         github-token: ${{ github.event.client_payload.token }}
         pr-number: ${{ github.event.client_payload.issue_number }}
-        sast-scan-run-id: ${{ github.event.client_payload.workflow_run_id }}
-        sast-scan-artifact-id: ${{ github.event.client_payload.artifact_id }}
+        sca-scan-run-id: ${{ github.event.client_payload.workflow_run_id }}
+        sca-scan-artifact-id: ${{ github.event.client_payload.artifact_id }}
+        fix-remote: 'true'
         repository: ${{ github.event.client_payload.repository.full_name }}
         branch: ${{ github.event.client_payload.repository.branch }}
         fix-sast-params: ${{ github.event.client_payload.fix_sast_params }}
