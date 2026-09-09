@@ -91,7 +91,7 @@ jobs:
         path: 'source-code'
 
     - id: run-fix-sast
-      uses: veracode-repo-integration/veracode-fix-for-sca@v0.1.10
+      uses: veracode-repo-integration/veracode-fix-for-sca@feature/sast-workflow
       env:
         VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
         VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
