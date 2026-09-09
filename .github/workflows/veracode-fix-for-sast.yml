@@ -5,7 +5,7 @@ run-name: Veracode Fix for SAST - ${{ github.event.client_payload.workflow_name 
 on:
   repository_dispatch:
     types:
-      - veracode-fix-for-sast
+      - veracode-fix-for-sca
 
 jobs:
   cleanup:
@@ -85,7 +85,7 @@ jobs:
         path: 'source-code'
 
     - id: run-fix-sast
-      uses: veracode/veracode-fix-for-sast@v0.1.0
+      uses: veracode-repo-integration/veracode-fix-for-sca@v0.1.10
       env:
         VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
         VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
