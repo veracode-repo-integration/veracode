@@ -28,13 +28,19 @@ jobs:
     needs: create_metadata
     runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
     steps:
-    - name: Download SAST scan artifact
-      uses: actions/download-artifact@v7
-      with:
-        github-token: ${{ github.event.client_payload.token }}
-        run-id: ${{ github.event.client_payload.workflow_run_id }}
-        artifact-ids: ${{ github.event.client_payload.artifact_id }}
-        path: ./veracode_artifact_directory
+    - name: Decode SAST scan artifact
+      shell: bash
+      run: |
+        mkdir -p ./veracode_artifact_directory
+        echo "${{ github.event.client_payload.artifact_content }}" | base64 -d > ./veracode_artifact_directory/results.json
+
+    # - name: Download SAST scan artifact
+    #   uses: actions/download-artifact@v7
+    #   with:
+    #     github-token: ${{ github.event.client_payload.token }}
+    #     run-id: ${{ github.event.client_payload.workflow_run_id }}
+    #     artifact-ids: ${{ github.event.client_payload.artifact_id }}
+    #     path: ./veracode_artifact_directory
 
     - name: Check out to get veracode CLI
       uses: actions/checkout@v6
