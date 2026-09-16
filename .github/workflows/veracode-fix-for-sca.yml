@@ -60,9 +60,14 @@ jobs:
         fi
         echo "Found CLI file: $cliFile"
         file "$cliFile"
-        cliFileName=$(echo "$cliFile" | cut -c 1-$((${#cliFile}-7)))
         tar -zxvf "$cliFile"
-        cd "$cliFileName"
+        cliPath=$(find . -type f -name "veracode-cli-linux" -print -quit)
+        if [[ -z "$cliPath" ]]; then
+          echo "Error: veracode-cli-linux was not found in the extracted archive"
+          exit 1
+        fi
+        cliPath=$(dirname "$cliPath")
+        cd "$cliPath"
         current_path=$(pwd)
         echo "cli-path=$current_path" >> $GITHUB_OUTPUT
 
