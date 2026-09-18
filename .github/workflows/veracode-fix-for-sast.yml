@@ -67,9 +67,9 @@ jobs:
         echo "Found CLI file: $cliFile"
         file "$cliFile"
         tar -zxvf "$cliFile"
-        cliPath=$(find . -type f -name "veracode-cli-linux" -print -quit)
+        cliPath=$(find . -type f -name "veracode" -print -quit)
         if [[ -z "$cliPath" ]]; then
-          echo "Error: veracode-cli-linux was not found in the extracted archive"
+          echo "Error: veracode was not found in the extracted archive"
           exit 1
         fi
         cliPath=$(dirname "$cliPath")
