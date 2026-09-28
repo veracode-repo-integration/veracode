@@ -20,6 +20,9 @@ on:
       head_sha:
         required: true
         type: string
+      fix_sast_params:
+        required: false
+        type: string
 
 jobs:
   create_metadata:
@@ -37,7 +40,8 @@ jobs:
             },
             "branch": "${{ inputs.branch }}",
             "sha": "${{ inputs.head_sha }}",
-            "run_id": "${{ github.run_id }}"
+            "run_id": "${{ github.run_id }}",
+            "fix_sast_params": "${{ inputs.fix_sast_params }}"
           }' > workflow-metadata.json
         shell: bash
 
