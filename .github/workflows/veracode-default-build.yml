@@ -43,6 +43,11 @@ jobs:
     outputs:
       runner_os: ${{ steps.identify_runner_os.outputs.runner_os }}
     steps:
+      - name: Install git-lfs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+          git lfs install
       - name: Identify the runner OS
         id: identify_runner_os
         shell: bash
@@ -60,6 +65,11 @@ jobs:
       VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
 
     steps:
+      - name: Install git-lfs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+          git lfs install
       - uses: actions/checkout@v6
         with:
           path: 'veracode-helper'
@@ -152,6 +162,11 @@ jobs:
       VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
 
     steps:
+      - name: Install git-lfs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+          git lfs install
       - uses: actions/checkout@v6
         with:
           path: 'veracode-helper'

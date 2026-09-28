@@ -29,6 +29,11 @@ jobs:
     needs: create_metadata
     runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
     steps:
+      - name: Install git-lfs
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git-lfs
+          git lfs install
     - name: Decode SAST scan artifact
       shell: bash
       run: |
