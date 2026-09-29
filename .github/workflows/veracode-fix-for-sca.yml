@@ -30,8 +30,8 @@ jobs:
     steps:
       - name: Install git-lfs
         run: |
-          sudo apt-get update
-          sudo apt-get install -y git-lfs
+          apt-get update
+          apt-get install -y git-lfs
           git lfs install
     - name: Download SCA scan artifact
       uses: actions/download-artifact@v7
