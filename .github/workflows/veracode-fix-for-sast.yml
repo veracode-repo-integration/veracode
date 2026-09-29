@@ -36,19 +36,11 @@ jobs:
           sudo apt-get install -y git-lfs
           git lfs install
 
-      - name: Decode SAST scan artifact
-        shell: bash
-        run: |
-          mkdir -p ./veracode_artifact_directory
-          echo "${{ github.event.client_payload.artifact_content }}" | base64 -d > ./veracode_artifact_directory/results.json
-
-      # - name: Download SAST scan artifact
-      #   uses: actions/download-artifact@v7
-      #   with:
-      #     github-token: ${{ github.event.client_payload.token }}
-      #     run-id: ${{ github.event.client_payload.workflow_run_id }}
-      #     artifact-ids: ${{ github.event.client_payload.artifact_id }}
-      #     path: ./veracode_artifact_directory
+      # The fix_id-enriched results.json is stored by veracode-github-app as a git blob in
+      # this repo and passed as `results-blob-sha` below. The veracode-fix-for-sca action
+      # fetches that blob and writes veracode_artifact_directory/results.json itself, so no
+      # decode step is needed here (client_payload can't carry the full base64 - it exceeds
+      # GitHub's ~64 KB dispatch limit).
 
       - name: Check out to get veracode CLI
         uses: actions/checkout@v6
@@ -127,4 +119,5 @@ jobs:
           branch: ${{ github.event.client_payload.repository.branch }}
           fix-sca-params: ${{ github.event.client_payload.fix_sast_params }}
           fix-sast-params: ${{ github.event.client_payload.fix_sast_params }}
+          results-blob-sha: ${{ github.event.client_payload.results_blob_sha }}
           github-api-url: ${{ github.api_url }}
