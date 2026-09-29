@@ -45,8 +45,8 @@ jobs:
     steps:
       - name: Install git-lfs
         run: |
-          sudo apt-get update
-          sudo apt-get install -y git-lfs
+          apt-get update
+          apt-get install -y git-lfs
           git lfs install
       - name: Identify the runner OS
         id: identify_runner_os
@@ -67,8 +67,8 @@ jobs:
     steps:
       - name: Install git-lfs
         run: |
-          sudo apt-get update
-          sudo apt-get install -y git-lfs
+          apt-get update
+          apt-get install -y git-lfs
           git lfs install
       - uses: actions/checkout@v6
         with:
@@ -164,8 +164,8 @@ jobs:
     steps:
       - name: Install git-lfs
         run: |
-          sudo apt-get update
-          sudo apt-get install -y git-lfs
+          apt-get update
+          apt-get install -y git-lfs
           git lfs install
       - uses: actions/checkout@v6
         with:
