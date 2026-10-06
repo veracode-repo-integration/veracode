@@ -106,8 +106,8 @@ jobs:
       - id: run-fix-sast
         uses: veracode-repo-integration/veracode-fix-for-sca@feature/sast-workflow
         env:
-          VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID }}'
-          VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY }}'
+          VERACODE_API_KEY_ID: '${{ secrets.VERACODE_API_ID_DEV }}'
+          VERACODE_API_KEY_SECRET: '${{ secrets.VERACODE_API_KEY_DEV }}'
           FIX_SAST_BACKEND_URL: api-agora-stage-132.stage.veracode.io
           CLI_PATH: ${{ runner.os == 'Windows' && steps.cli-setup-windows.outputs.cli-path || steps.cli-setup-unix.outputs.cli-path }}
         with:
