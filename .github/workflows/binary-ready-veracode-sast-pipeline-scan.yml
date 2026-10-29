@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Verify Veracode API credentials
         id: verify_api_creds
-        uses: veracode/github-actions-integration-helper@v0.1.11
+        uses: veracode/github-actions-integration-helper@v0.1.12
         with:
           action: validateVeracodeApiCreds
           token: ${{ github.event.client_payload.token }}
@@ -45,7 +45,7 @@ jobs:
       - name: Verify Policy name
         id: verify_policy_name
         if: success()
-        uses: veracode/github-actions-integration-helper@v0.1.11
+        uses: veracode/github-actions-integration-helper@v0.1.12
         with:
           action: validatePolicyName
           token: ${{ github.event.client_payload.token }}
@@ -91,6 +91,7 @@ jobs:
     runs-on: ${{ fromJSON(github.event.client_payload.user_config.default_runs_on) }}
     needs: [register, validations, prepare_pipeline_scan]
     strategy:
+      fail-fast: false
       matrix:
         file: ${{fromJson(needs.prepare_pipeline_scan.outputs.matrix_files)}}
 
@@ -121,13 +122,14 @@ jobs:
       - name: Veracode Pipeline-Scan
         if: always()
         id: pipeline-scan
-        uses: veracode/Veracode-pipeline-scan-action@v1.0.23
+        uses: veracode/Veracode-pipeline-scan-action@v1.0.25
         with:
           vid: ${{ secrets.VERACODE_API_ID }}
           vkey: ${{ secrets.VERACODE_API_KEY }}
           veracode_policy_name: ${{ github.event.client_payload.policy_name }}
           file: ./veracode_artifact_directory/${{ matrix.file }}
           fail_build: ${{ github.event.client_payload.user_config.break_build_policy_findings }}
+          fail_build_error: ${{ github.event.client_payload.user_config.break_build_on_error }}
           summary_output: true
           summary_output_file: ${{ strategy.job-index }}-results.txt
           json_output: true
@@ -140,7 +142,7 @@ jobs:
       - name: Veracode Pipeline Results
         if: always()
         id: prepare-results
-        uses: veracode/github-actions-integration-helper@v0.1.11
+        uses: veracode/github-actions-integration-helper@v0.1.12
         with:
           action: 'preparePipelineResults'
           token: ${{ github.event.client_payload.token }}
